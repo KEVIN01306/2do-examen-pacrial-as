@@ -3,7 +3,7 @@ import type { Alumno } from "../models/alumno.interface"
 
 
 
-const alumnosList: Alumno[] =  [
+const alumnosList: Alumno[] = [
     {
         id: "1",
         nombre: "Kevin sanchez",
@@ -20,11 +20,14 @@ const alumnosList: Alumno[] =  [
 
 
 
-const getAllAlumnos = () => {
-    const alumnos =  alumnosList;
-    return alumnos;
-}
-
+const getAllAlumnos = (textShared: string): Alumno[] => {
+    if (textShared?.trim()) {
+        return alumnosList.filter((alumno) =>
+            alumno.nombre.toLowerCase().includes(textShared.toLowerCase())
+        );
+    }
+    return [...alumnosList];
+};
 
 const registeralumno = (alumno: Alumno) => {
     const newAlumno: Alumno = {

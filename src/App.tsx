@@ -14,6 +14,8 @@ function App() {
     carrera: ""
   });
 
+  const [textShared, setTextShared] = useState<string>("");
+
 
   const submmit = () => {
     registeralumno(alumnoSelected);
@@ -31,7 +33,7 @@ function App() {
 
   const loadAlumnos = () => {
     try{
-          const response = getAllAlumnos();
+          const response = getAllAlumnos(textShared);
           setAlumnos(response);
     }catch (err) {
       console.log(err)
@@ -39,28 +41,33 @@ function App() {
   }
 
   useEffect(() => {
-    return () => loadAlumnos();
-  },[]) 
+    loadAlumnos();
+  }, [textShared]);
 
   return (
     <>
       <h1>2do Parcial Arquitectura de sistemas</h1>
 
       <div>
+        <label >Shared By Nombre</label>
+        <input  name="shared" type="text" onChange={(e) => setTextShared(e.target.value)} />
+      </div>
+
+      <div>
         <form action="">
           <div>
               <label >Nombre alumno</label>
-              <input id="nombre" type="text" onChange={(e) => setAlumnoSelected((prev) => ({...prev,nombre: e.target.value}))} />
+              <input id="nombre" value={alumnoSelected.nombre} name="nombre" type="text" onChange={(e) => setAlumnoSelected((prev) => ({...prev,nombre: e.target.value}))} />
           </div>
 
           <div>
               <label >Nombre Carnet</label>
-              <input id="carne" type="text" onChange={(e) => setAlumnoSelected((prev) => ({...prev,carne: e.target.value}))} />
+              <input id="carne" name="carne" value={alumnoSelected.carne} type="text" onChange={(e) => setAlumnoSelected((prev) => ({...prev,carne: e.target.value}))} />
           </div>
 
           <div>
               <label >Carrera</label>
-              <select onChange={(e) => setAlumnoSelected((prev) => ({...prev,carrera: e.target.value}))}>
+              <select value={alumnoSelected.carrera} id="carrera" name="carrera" onChange={(e) => setAlumnoSelected((prev) => ({...prev,carrera: e.target.value}))}>
                 <option value={""}>Seleccciona una carrera</option>
                 <option value={"Ingenieria en sistemas"}>Ingenieria en sistemas</option>
                 <option value={"Ingenieria en Mecatronica"}>Ingenieria en Mecatronica</option>
