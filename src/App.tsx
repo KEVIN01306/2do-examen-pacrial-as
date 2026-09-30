@@ -46,26 +46,27 @@ function App() {
 
   return (
     <>
+    <main>
       <h1>2do Parcial Arquitectura de sistemas</h1>
 
-      <div>
+      <div className="input">
         <label >Shared By Nombre</label>
         <input  name="shared" type="text" onChange={(e) => setTextShared(e.target.value)} />
       </div>
 
-      <div>
+      <div className="container-main">
         <form action="">
-          <div>
+          <div className="input">
               <label >Nombre alumno</label>
               <input id="nombre" value={alumnoSelected.nombre} name="nombre" type="text" onChange={(e) => setAlumnoSelected((prev) => ({...prev,nombre: e.target.value}))} />
           </div>
 
-          <div>
+          <div className="input">
               <label >Nombre Carnet</label>
               <input id="carne" name="carne" value={alumnoSelected.carne} type="text" onChange={(e) => setAlumnoSelected((prev) => ({...prev,carne: e.target.value}))} />
           </div>
 
-          <div>
+          <div className="input">
               <label >Carrera</label>
               <select value={alumnoSelected.carrera} id="carrera" name="carrera" onChange={(e) => setAlumnoSelected((prev) => ({...prev,carrera: e.target.value}))}>
                 <option value={""}>Seleccciona una carrera</option>
@@ -79,7 +80,7 @@ function App() {
       </div>
 
       <div>
-        <table>
+        <table >
           <thead>
             <tr>
               <td>
@@ -118,6 +119,7 @@ function App() {
           </tbody>
         </table>
       </div>
+      </main>
     </>
   )
 }
